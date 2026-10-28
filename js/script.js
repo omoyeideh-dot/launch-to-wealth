@@ -322,8 +322,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- sticky floating CTA (appears after scrolling past the hero) ---------- */
   const isHome = /(^|\/)(index\.html)?$/.test(location.pathname);
-  const ctaHref = isHome ? '#learn' : (location.pathname.includes('paidtuber') ? '#enroll' : 'index.html#learn');
-  const ctaLabel = location.pathname.includes('paidtuber') ? 'Sign Me Up!' : 'Show Me How';
+  const onSchool = location.pathname.includes('wealth-creator-school');
+  const ctaHref = onSchool ? '#tracks' : (isHome ? '#learn' : (location.pathname.includes('paidtuber') ? '#enroll' : 'wealth-creator-school.html'));
+  const ctaLabel = location.pathname.includes('paidtuber') ? 'Sign Me Up!' : (onSchool ? 'Choose a Track' : 'Show Me How');
   const fab = document.createElement('a');
   fab.href = ctaHref;
   fab.className = 'btn btn-primary floating-cta';
@@ -378,6 +379,56 @@ document.addEventListener('DOMContentLoaded', () => {
         layer.appendChild(p);
       }
       host.insertBefore(layer, host.firstChild);
+    });
+  }
+
+  /* ---------- Wealth Creator Blueprint pop-up (front-end only — not wired to an email service yet) ---------- */
+  const bpButtons = document.querySelectorAll('[data-blueprint]');
+  if (bpButtons.length) {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML =
+      '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="bp-title">' +
+        '<button type="button" class="modal-close" aria-label="Close">&times;</button>' +
+        '<div class="modal-head">' +
+          '<h2 id="bp-title">Get the Wealth Creator Blueprint straight to your inbox</h2>' +
+          '<p class="modal-sub">Tell us where to send it.</p>' +
+        '</div>' +
+        '<form>' +
+          '<input type="hidden" name="interest" value="">' +
+          '<div class="form-row"><label for="bp-first">First name</label><input type="text" id="bp-first" name="first_name" required autocomplete="given-name"></div>' +
+          '<div class="form-row"><label for="bp-last">Last name</label><input type="text" id="bp-last" name="last_name" required autocomplete="family-name"></div>' +
+          '<div class="form-row"><label for="bp-email">Email address</label><input type="email" id="bp-email" name="email" required autocomplete="email"></div>' +
+          '<button type="submit" class="btn btn-primary">Send me the Blueprint</button>' +
+          '<span class="form-note">Unsubscribe anytime. No spam, ever.</span>' +
+        '</form>' +
+        '<div class="modal-success"><h2>You\u2019re in \u2713</h2><p>Check your inbox for the Wealth Creator Blueprint.</p></div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    const modalEl = overlay.querySelector('.modal');
+    const form = overlay.querySelector('form');
+    let lastFocus = null;
+    const close = () => {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    };
+    bpButtons.forEach(btn => btn.addEventListener('click', () => {
+      lastFocus = btn;
+      form.reset();
+      modalEl.classList.remove('is-done');
+      form.querySelector('[name="interest"]').value = btn.getAttribute('data-blueprint') || '';
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => form.querySelector('#bp-first').focus(), 50);
+    }));
+    overlay.querySelector('.modal-close').addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('is-open')) close(); });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      modalEl.classList.add('is-done');
+      setTimeout(close, 2600);
     });
   }
 });

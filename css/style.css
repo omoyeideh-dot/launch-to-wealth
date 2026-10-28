@@ -6,7 +6,7 @@
    Inter (body/utility).
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
   /* colors */
@@ -39,7 +39,6 @@
 
   --font-display: 'Fraunces', serif;
   --font-body: 'Inter', sans-serif;
-  --font-script: 'Great Vibes', cursive;
 
   --container: 1240px;
   --radius-lg: 28px;
@@ -202,9 +201,10 @@ p{ margin:0; }
   display:flex;
   align-items:center;
   gap:10px;
-  font-family: var(--font-script);
-  font-size: 2.1rem;
-  letter-spacing: 0.01em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
   white-space: nowrap;
 }
 .nav-logo img{ height: 34px; width:auto; }
@@ -280,6 +280,9 @@ p{ margin:0; }
   transition: opacity .4s ease;
 }
 .img-frame img[data-loaded="true"]{ opacity:1; }
+.img-frame:not(.no-tint) img{
+  filter: saturate(0.78) brightness(0.97) sepia(0.08);
+}
 /* Soft brand-color wash so real, uncontrolled photos harmonize with the
    palette instead of clashing. The founder portrait opts out via .no-tint
    since it should read as a true, accurate likeness. */
@@ -288,7 +291,7 @@ p{ margin:0; }
   position:absolute; inset:0;
   z-index:2;
   pointer-events:none;
-  background: linear-gradient(150deg, rgba(233,126,80,0.16) 0%, rgba(189,177,109,0.14) 100%);
+  background: linear-gradient(150deg, rgba(233,126,80,0.34) 0%, rgba(189,177,109,0.30) 100%);
   mix-blend-mode: multiply;
 }
 .img-frame .placeholder-label, .watch-clip-frame .placeholder-label{
@@ -391,7 +394,7 @@ p{ margin:0; }
   letter-spacing: 0.01em;
 }
 .press-row img{
-  height: 42px;
+  height: 34px;
   width: auto;
   filter: grayscale(100%);
   opacity: 0.55;
@@ -455,6 +458,18 @@ p{ margin:0; }
 .hero-visual .img-frame{
   aspect-ratio: 4/5;
 }
+.hero-face-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.hero-face-grid .img-frame{
+  aspect-ratio: 1/1;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+.hero-face-grid{ gap:12px; padding-bottom:18px; }
+.hero-face-grid .img-frame:nth-child(3n+2){ transform: translateY(18px); }
 .hero-visual .floater{
   position:absolute;
   background: var(--paper);
@@ -1181,8 +1196,9 @@ p{ margin:0; }
   opacity:0;
 }
 .curtain-word{
-  font-family: var(--font-script);
-  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.8rem, 4.4vw, 2.7rem);
   color: var(--ink);
   margin-top: 22px;
   position:relative; z-index:2;
@@ -1961,3 +1977,85 @@ p{ margin:0; }
   .section-rain{ display:none; }
   .word-reveal .w{ transition: none; }
 }
+
+
+/* =========================================================
+   WEALTH CREATOR SCHOOL — tracks
+========================================================= */
+.track-grid{
+  margin-top: 54px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+.track-card{
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  padding: 38px 32px;
+  box-shadow: var(--shadow-card);
+  display:flex;
+  flex-direction:column;
+  gap: 26px;
+  scroll-margin-top: 110px;
+}
+.track-card .badge{
+  align-self:flex-start;
+  font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+  padding:6px 14px; border-radius: var(--radius-pill);
+  background: var(--sage-pale); color: var(--sage-deep);
+}
+.track-card h3{ font-size:1.6rem; margin-top:-10px; }
+.track-card .course{
+  display:flex; flex-direction:column; gap:10px; align-items:flex-start;
+  padding-top:22px; border-top:1px solid rgba(61,61,61,0.12);
+}
+.track-card .course:last-child{ margin-top:auto; }
+.track-card .course h4{ font-size:1.1rem; }
+.track-card .course p{ color: var(--ink-soft); line-height:1.6; font-size:0.95rem; }
+.track-card .course .btn{ margin-top:6px; }
+@media (max-width: 1080px){ .track-grid{ grid-template-columns:1fr; } }
+
+/* =========================================================
+   BLUEPRINT POP-UP
+========================================================= */
+.modal-overlay{
+  position:fixed; inset:0; z-index:9000;
+  background: rgba(61,61,61,0.6);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  opacity:0; visibility:hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.modal-overlay.is-open{ opacity:1; visibility:visible; }
+.modal{
+  position:relative;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  width:100%; max-width:460px;
+  padding: 44px 38px 36px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.45);
+  transform: translateY(18px) scale(.97);
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  max-height: 92vh; overflow:auto;
+}
+.modal-overlay.is-open .modal{ transform:none; }
+.modal-close{
+  position:absolute; top:14px; right:14px;
+  width:38px; height:38px; border-radius:50%;
+  border:none; background: var(--cream);
+  color: var(--ink-soft); font-size:1.4rem; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+}
+.modal-close:hover{ background: var(--cream-deep); color: var(--ink); }
+.modal h2{ font-size:1.7rem; line-height:1.2; }
+.modal .modal-sub{ margin-top:10px; color: var(--ink-soft); font-size:0.95rem; line-height:1.5; }
+.modal form{ margin-top:24px; display:flex; flex-direction:column; gap:16px; }
+.modal .btn{ width:100%; margin-top:4px; }
+.modal .form-note{ font-size:0.78rem; color: var(--ink-soft); text-align:center; }
+.modal-success{ display:none; text-align:center; padding:10px 0; }
+.modal-success h2{ font-size:1.6rem; }
+.modal-success p{ margin-top:12px; color: var(--ink-soft); }
+.modal.is-done form, .modal.is-done .modal-head{ display:none; }
+.modal.is-done .modal-success{ display:block; }
+@media (max-width:480px){ .modal{ padding:40px 22px 28px; } }
