@@ -2117,3 +2117,6 @@ p{ margin:0; }
   .nav-logo{ font-size:1.25rem; }
   .nav{ padding:14px 20px; }
 }
+
+/* No floating money emojis on phones */
+@media (max-width: 760px){ .section-rain{ display:none; } }
