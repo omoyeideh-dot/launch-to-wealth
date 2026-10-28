@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
      Works on both desktop and mobile. ---------- */
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const isMobile = window.innerWidth < 760;
-    const perSection = isMobile ? 6 : 11;
+    const perSection = isMobile ? 3 : 11;
     const emojiSet = ['\uD83D\uDCB5', '\uD83D\uDCB0', '\uD83D\uDCB2']; // 💵 💰 💲
     // Any section-like block that has its own background (skips the
     // marquee ticker and footer, which are busy/dark enough already).
