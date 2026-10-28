@@ -482,7 +482,7 @@ p{ margin:0; }
   z-index:2;
 }
 .hero-visual .floater.f1{ top: 10%; left: -12%; }
-.hero-visual .floater.f2{ bottom: 8%; right: -10%; }
+.hero-visual .floater.f2{ bottom: 34px; right: 14px; }
 .floater .stat-num{ font-family: var(--font-display); font-size:1.6rem; color: var(--rose-ink); }
 .floater .stat-label{ font-size:0.78rem; color: var(--ink-soft); line-height:1.3; max-width:120px; }
 .floater .sage-dot{ width:10px; height:10px; border-radius:50%; background:var(--sage); flex-shrink:0; }
@@ -1417,9 +1417,11 @@ p{ margin:0; }
 }
 .book-cover-frame{
   aspect-ratio: 3/4.4;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
+.book-cover-frame img{ object-fit: contain; }
 .book-copy h2{ font-size: clamp(1.9rem, 3vw, 2.5rem); margin-top:12px; }
 .book-copy p{ margin-top:16px; color: var(--ink-soft); font-size:1.03rem; line-height:1.6; max-width:480px; }
 .book-copy .btn{ margin-top:26px; }
@@ -1798,7 +1800,7 @@ p{ margin:0; }
 [data-reveal-stagger].is-visible > *:nth-child(6){ transition-delay: .42s; }
 
 /* -------------------- word-by-word headline reveal -------------------- */
-.word-reveal{ overflow:hidden; display:inline-block; padding-bottom:0.1em; margin-bottom:-0.1em; }
+.word-reveal{ overflow:hidden; display:inline-block; padding:0 0.14em 0.1em; margin:0 -0.14em -0.1em; }
 .word-reveal .w{
   display:inline-block;
   opacity: 0;
@@ -1980,41 +1982,46 @@ p{ margin:0; }
 
 
 /* =========================================================
-   WEALTH CREATOR SCHOOL — tracks
+   WEALTH CREATOR SCHOOL — tracks (editorial rows)
 ========================================================= */
-.track-grid{
-  margin-top: 54px;
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
-  align-items: stretch;
+.track-list{
+  margin-top: 48px;
+  border-bottom: 1px solid rgba(61,61,61,0.14);
 }
-.track-card{
-  background: var(--paper);
-  border-radius: var(--radius-lg);
-  padding: 38px 32px;
-  box-shadow: var(--shadow-card);
-  display:flex;
-  flex-direction:column;
-  gap: 26px;
+.track-row{
+  display:grid;
+  grid-template-columns: 0.85fr 1.4fr;
+  gap: 64px;
+  padding: 54px 0;
+  border-top: 1px solid rgba(61,61,61,0.14);
   scroll-margin-top: 110px;
 }
-.track-card .badge{
-  align-self:flex-start;
-  font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
-  padding:6px 14px; border-radius: var(--radius-pill);
-  background: var(--sage-pale); color: var(--sage-deep);
+.track-head{ display:flex; align-items:baseline; gap:22px; }
+.track-num{
+  font-family: var(--font-display); font-style: italic;
+  font-size: 2.6rem; line-height:1; color: var(--rose-line);
 }
-.track-card h3{ font-size:1.6rem; margin-top:-10px; }
-.track-card .course{
-  display:flex; flex-direction:column; gap:10px; align-items:flex-start;
-  padding-top:22px; border-top:1px solid rgba(61,61,61,0.12);
+.track-head h3{ font-size: clamp(1.8rem, 2.6vw, 2.5rem); line-height:1.1; }
+.track-courses{ display:flex; flex-direction:column; }
+.course{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items:center;
+  padding: 28px 0;
+  border-top: 1px solid rgba(61,61,61,0.1);
 }
-.track-card .course:last-child{ margin-top:auto; }
-.track-card .course h4{ font-size:1.1rem; }
-.track-card .course p{ color: var(--ink-soft); line-height:1.6; font-size:0.95rem; }
-.track-card .course .btn{ margin-top:6px; }
-@media (max-width: 1080px){ .track-grid{ grid-template-columns:1fr; } }
+.course:first-child{ border-top:none; padding-top:0; }
+.course:last-child{ padding-bottom:0; }
+.course h4{ font-size:1.3rem; }
+.course h4 + p{ margin-top:8px; }
+.course p{ color: var(--ink-soft); line-height:1.65; font-size:1rem; max-width:560px; }
+.course .btn{ white-space:nowrap; }
+@media (max-width: 900px){
+  .track-row{ grid-template-columns:1fr; gap:26px; padding:40px 0; }
+  .course{ grid-template-columns:1fr; gap:16px; }
+  .course .btn{ justify-self:start; }
+}
 
 /* =========================================================
    BLUEPRINT POP-UP

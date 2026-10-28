@@ -43,6 +43,7 @@ The 5 links you sent are embedded on the Episodes page:
 Videos are lazy-loaded — a clickable thumbnail shows until someone presses play, so the page stays fast.
 
 ## What's new in this round
+- Wealth Creator School tracks redesigned as three clean editorial rows (number + track name on the left, courses with their Learn more buttons on the right) — no more uneven cards. Fixed the clipped "School" headline, the cut-off 600K+ badge in the hero, and removed the tint/pink frame behind the book cover.
 - **Wealth Creator School** replaces "Launch to Wealth Academy": 3 tracks (Financial Assets, Physical Assets, Knowledge Assets) with Vanessa's copy, on the home page and on its own page, `wealth-creator-school.html` (linked from the nav "Learn" and the footer). Every "Learn more" opens a pop-up — "Get the Wealth Creator Blueprint straight to your inbox" — with first name, last name, email. The pop-up is front-end only for now: it needs your email service (Mailchimp/ConvertKit/etc.) to actually collect addresses. It also records which course the person clicked from.
 - New hero header: "Build wealth beyond a 9-5 income by owning assets".
 - Hero photo grid is now 9 women (4 Black women), Unsplash, free to use.
