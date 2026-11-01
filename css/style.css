@@ -6,7 +6,7 @@
    Inter (body/utility).
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
   /* colors */
@@ -2144,3 +2144,7 @@ p{ margin:0; }
 /* Store products are coming soon: wash the photos out so they read as placeholders, not final product shots */
 .store-card .img-frame img{ filter: grayscale(0.65) saturate(0.8) brightness(1.06) contrast(0.92); }
 .store-card .img-frame::after{ background: linear-gradient(150deg, rgba(233,126,80,0.42) 0%, rgba(189,177,109,0.38) 100%); }
+
+
+/* Bold wordmark */
+.nav-logo, .curtain-word{ font-weight: 700; }
